@@ -1,15 +1,6 @@
 # Chatbot with NextJs
 
-**Next , tailwindcss and typescript**
-
-Build locally:
-
-**1. Clone Repo**
-
-```bash
-git clone # Backend-Ecommerce
-
-**Node Js and Express**
+** Next , tailwindcss and typescript**
 
 Build locally:
 
