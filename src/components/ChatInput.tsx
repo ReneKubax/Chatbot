@@ -20,9 +20,7 @@ const ChatInput: FC<ChatInputProps> = ({className, ...props}) => {
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify({
-                    messages: 'Hello'
-                })
+                body: JSON.stringify({messages: [message]})
             })
             return response.body
         },
