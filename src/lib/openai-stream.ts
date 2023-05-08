@@ -9,15 +9,15 @@ export interface chatGPTMessage {
 
 
 export interface openAIStreamPayload  {
-    model: string,
-    messages: chatGPTMessage[],
-    temperature: number,
-    top_p: number,
-    frecuency_penalty: number,
-    presence_penalty: number,
-    max_tokens: number,
-    stream: boolean,
-    n: number
+    model: string;
+    messages: chatGPTMessage[];
+    temperature: number;
+    top_p: number;
+    frecuency_penalty: number;
+    presence_penalty: number;
+    max_tokens: number;
+    stream: boolean;
+    n: number;
 }
 
 export async function openAIStream(payload: openAIStreamPayload) {
@@ -27,13 +27,14 @@ export async function openAIStream(payload: openAIStreamPayload) {
     let counter = 0;
 
     const res = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
         headers: {
-            'content-type': 'application/json',
-            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+            "content-type": "application/json",
+            Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         },
+        method: "POST",
         body: JSON.stringify(payload),
     })
+
     const stream = new ReadableStream({
         async start(controller) {
             function onParse(event: ParsedEvent | ReconnectInterval) {
@@ -46,7 +47,7 @@ export async function openAIStream(payload: openAIStreamPayload) {
                 try {
                     const json = JSON.parse(data)
                     console.log("json", json)
-                    const text = json.choices[0].delta?.content || ''
+                    const text = json.choices[0].delta?.content || ""
                     console.log('text', text)
 
                     if(counter < 2 && (text.match(/\n/) || []).lenght ){
@@ -58,8 +59,8 @@ export async function openAIStream(payload: openAIStreamPayload) {
 
                     counter++
 
-                } catch (error) {
-                    controller.error(error);
+                } catch (e) {
+                    controller.error(e);
                 }
                }
             }
@@ -68,7 +69,7 @@ export async function openAIStream(payload: openAIStreamPayload) {
             for await(const chunk of res.body as any){
                 parser.feed(decoder.decode(chunk));
             }
-        }
+        },
     })
-    return stream
+    return stream;
 }
