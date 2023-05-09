@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC, HTMLAttributes } from "react";
 
-interface ChatMessageProps {}
+interface ChatMessageProps extends HTMLAttributes<HTMLDivElement>{}
 
-const ChatMessage: FC<ChatMessageProps> = () => {
-    return <div>ChatMessage</div>
+const ChatMessage: FC<ChatMessageProps> = ({className, ...props}) => {
+    return <div {...props}>ChatMessage</div>
 }
 
 export default ChatMessage
