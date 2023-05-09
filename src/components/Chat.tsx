@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/accordion";
 import ChatHeader from "./ChatHeader";
 import ChatInput from "./ChatInput";
-import ChatMessage from "./ChatMessage";
+import ChatMessage from "./ChatMessages";
 
 
 const Chat: FC = () => {
