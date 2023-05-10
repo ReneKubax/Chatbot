@@ -1,3 +1,5 @@
+import Link from 'next/link'
+import React from 'react';
 import { FC } from "react";
 
 interface MarkdownLiteProps {
@@ -19,9 +21,31 @@ const MarkdownLite: FC<MarkdownLiteProps> = ({text}) => {
         if(lastIndex < matchStart) {
             parts.push(text.slice(lastIndex, matchStart))
         }
+        parts.push(
+            <Link
+              target='_blank'
+              rel='noopener noreferrer'
+              className='break-words underline underline-offset-2 text-blue-600'
+              key={linkUrl}
+              href={linkUrl}>
+              {linkText}
+            </Link>
+          )
+          lastIndex = matchEnd
     }
-    
-    return <div>MarkdownLite</div>;
-}
+
+    if(lastIndex < text.length) {
+        parts.push(text.slice(lastIndex))
+    }
+
+    return (
+        <>
+          {parts.map((part, i) => (
+            <React.Fragment key={i}>{part}</React.Fragment>
+          ))}
+        </>
+      )
+    }
+
 
 export default MarkdownLite
