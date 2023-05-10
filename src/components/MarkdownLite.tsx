@@ -1,8 +1,11 @@
 import { FC } from "react";
 
-interface MarkdownLiteProps {}
+interface MarkdownLiteProps {
+    text: string
+}
 
-const MarkdownLite: FC<MarkdownLiteProps> = ({}) => {
+const MarkdownLite: FC<MarkdownLiteProps> = ({text}) => {
+    const linkRegex = /\[(.+?)\]\((.+?)\)/g
     return <div>MarkdownLite</div>;
 }
 
