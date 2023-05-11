@@ -11,8 +11,6 @@ import { CornerDownLeft, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 
-interface ChatInputProps extends HTMLAttributes<HTMLDivElement>{}
-
 interface ChatInputProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ChatInput: FC<ChatInputProps> = ({ className, ...props }) => {
