@@ -25,5 +25,5 @@ npm run dev
 
 **4. Use It**
 
-You should be able to start working with the proyect
+You should be able to start working with the proyect and you need to create aun account an generate a secret key to have the access to API of Open in https://platform.openai.com
 
