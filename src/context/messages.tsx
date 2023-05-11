@@ -1,7 +1,14 @@
 import { Message } from "@/lib/validators/message";
 import { nanoid } from "nanoid";
-import { ReactNode, createContext, useState } from "react";
+import { createContext, useState } from "react";
 
+const defaultValue = [
+  {
+    id: nanoid(),
+    text: 'Hello, how can I help you?',
+    isUserMessage: false,
+  },
+]
 export const MessagesContext = createContext<{
   messages: Message[]
   isMessageUpdating: boolean
@@ -18,40 +25,42 @@ export const MessagesContext = createContext<{
   setIsMessageUpdating: () => {},
 })
 
-export function MessagesProvider({children}: {children: ReactNode}) {
+export function MessagesProvider({ children }: { children: React.ReactNode }) {
+  const [messages, setMessages] = useState(defaultValue)
+  const [isMessageUpdating, setIsMessageUpdating] = useState<boolean>(false)
 
-    const [isMessageUpdating, setIsMessageUpdating] = useState<boolean>(false)
+  const addMessage = (message: Message) => {
+    setMessages((prev) => [...prev, message])
+  }
 
-    const [messages, setMessages] = useState<Message[]>([
-        {
-            id: nanoid(),
-            isUserMessage: true,
-            text: 'Hello, how can i help you?'
+  const removeMessage = (id: string) => {
+    setMessages((prev) => prev.filter((message) => message.id !== id))
+  }
+
+  const updateMessage = (
+    id: string,
+    updateFn: (prevText: string) => string
+  ) => {
+    setMessages((prev) =>
+      prev.map((message) => {
+        if (message.id === id) {
+          return { ...message, text: updateFn(message.text) }
         }
-    ])
-
-    const addMessage = (message: Message) => {
-        setMessages((prev)=> [...prev, message])
-    }
-
-    const removeMessage = (id: string) => {
-        setMessages((prev)=> prev.filter((message) => message.id !== id))
-    }
-
-    const updateMessage = (id: string, updateFn: (prevText: string) => string) => {
-        setMessages((prev)=> prev.map((message) => message.id === id ? {...message, text: updateFn(message.text)} : message))
-    }
-
+        return message
+      })
+    )
+  }
 
   return (
-    <MessagesContext.Provider value={{
-      messages,
-      addMessage,
-      removeMessage,
-      updateMessage,
-      isMessageUpdating,
-      setIsMessageUpdating
-    }}>
+    <MessagesContext.Provider
+      value={{
+        messages,
+        isMessageUpdating,
+        addMessage,
+        removeMessage,
+        updateMessage,
+        setIsMessageUpdating,
+      }}>
       {children}
     </MessagesContext.Provider>
   )
