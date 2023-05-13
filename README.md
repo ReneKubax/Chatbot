@@ -39,5 +39,7 @@ You should be able to start working with the proyect and you need to create aun 
 7. Class merging with tailwind-merge
 8. Conditional classes with clsx
 
+**Deploy of Chat**
 
+https://chatbotia-renekubax.netlify.app
 
