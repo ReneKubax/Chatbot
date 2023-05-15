@@ -43,3 +43,8 @@ You should be able to start working with the proyect and you need to create aun 
 
 https://chatbotia-renekubax.netlify.app
 
+![chatbot](https://github.com/ReneKubax/Chatbot/assets/97212849/df4cefb6-99af-4d76-8a9e-4e3c3799c76b)
+
+
+
+
